@@ -118,6 +118,28 @@ public class DepartmentDAO {
         // Trả thực thể về (lúc này EntityManager đã đóng hoàn toàn)
         return department;
     }
+
+    public void demonstrateNPlusOne() {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            List<Department> departments = em.createQuery(
+                    "SELECT d FROM Department d",
+                    Department.class
+            ).getResultList();
+
+            for (Department department : departments) {
+                System.out.println(
+                        department.getName()
+                                + " - Employees: "
+                                + department.getEmployees().size()
+                );
+            }
+
+        } finally {
+            em.close();
+        }
+    }
 }
 
 
