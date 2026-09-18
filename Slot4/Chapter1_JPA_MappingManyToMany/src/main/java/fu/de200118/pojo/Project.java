@@ -23,6 +23,7 @@ public class Project {
     @Column(nullable = true)
     private LocalDate endDate;
 
+
     public Project() {
     }
 
