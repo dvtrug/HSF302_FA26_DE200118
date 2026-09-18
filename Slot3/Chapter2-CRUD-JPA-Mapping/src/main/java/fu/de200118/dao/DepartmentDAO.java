@@ -29,7 +29,7 @@ public class DepartmentDAO {
     }
 
     public List<Department> findAll() {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         try {
             return em.createQuery(
@@ -42,7 +42,7 @@ public class DepartmentDAO {
     }
 
     public Department findById(Long id) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         try {
             return em.find(Department.class, id);
@@ -52,7 +52,7 @@ public class DepartmentDAO {
     }
 
     public Department update(Department department) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         try {
             em.getTransaction().begin();
@@ -70,7 +70,7 @@ public class DepartmentDAO {
     }
 
     public void delete(Long id) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         try {
             em.getTransaction().begin();
@@ -93,12 +93,10 @@ public class DepartmentDAO {
     }
 
     public Department findDepartmentWithEmployees(Long id) {
-        // Tạo EntityManager ngắn hạn cho thao tác đọc
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = emf.createEntityManager();
         Department department = null;
 
         try {
-            // Thực thi JPQL dùng JOIN FETCH theo đúng yêu cầu đề bài
             department = em.createQuery(
                             "SELECT d FROM Department d JOIN FETCH d.employees WHERE d.id = :id",
                             Department.class
