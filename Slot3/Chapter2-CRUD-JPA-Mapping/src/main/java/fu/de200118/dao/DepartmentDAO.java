@@ -4,14 +4,15 @@ import fu.de200118.pojo.Department;
 import fu.de200118.pojo.Employee;
 import fu.de200118.util.JPAUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
 public class DepartmentDAO {
-
+    private final EntityManagerFactory emf = JPAUtil.getEMF();
     public void save(Department department) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         try {
             em.getTransaction().begin();
