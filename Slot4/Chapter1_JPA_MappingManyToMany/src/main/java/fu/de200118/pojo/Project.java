@@ -76,4 +76,24 @@ public class Project {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    // Do not use the database-generated id in equals/hashCode because
+    // it may change from null to a generated value after persistence.
+    // projectCode is used as the stable business key.
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Project)) {
+            return false;
+        }
+        Project other = (Project) obj;
+        return projectCode != null && projectCode.equals(other.projectCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return projectCode != null ? projectCode.hashCode() : 0;
+    }
 }
