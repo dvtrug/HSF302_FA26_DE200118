@@ -16,6 +16,7 @@ public class Employee {
     private Long id;
     @Column(nullable = false)
     private String fullName;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Gender gender;
     @Column(unique = true, nullable = false)
@@ -27,10 +28,6 @@ public class Employee {
     @Column
     private boolean active = true;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", nullable = false)
-    private Department department;
-
     @ManyToMany
     @JoinTable(
             name = "employee_project",
@@ -40,6 +37,12 @@ public class Employee {
     private Set<Project> projects = new HashSet<>();
 
     public Employee() {
+    }
+
+    public Employee(String fullName, String email, Gender gender) {
+        this.fullName = fullName;
+        this.email = email;
+        this.gender = gender;
     }
 
     // Do not use the database-generated id in equals/hashCode because
@@ -134,14 +137,6 @@ public class Employee {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public Set<Project> getProjects() {
