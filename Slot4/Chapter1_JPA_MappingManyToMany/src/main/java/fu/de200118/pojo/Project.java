@@ -23,6 +23,8 @@ public class Project {
     @Column(nullable = true)
     private LocalDate endDate;
 
+    @ManyToMany(mappedBy = "projects")
+    private Set<Employee> employees;
 
     public Project() {
     }
