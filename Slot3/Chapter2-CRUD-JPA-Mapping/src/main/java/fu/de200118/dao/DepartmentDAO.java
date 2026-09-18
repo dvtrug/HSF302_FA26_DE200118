@@ -11,6 +11,10 @@ import java.util.List;
 
 public class DepartmentDAO {
     private final EntityManagerFactory emf = JPAUtil.getEMF();
+
+    public DepartmentDAO() {
+    }
+
     public void save(Department department) {
         EntityManager em = emf.createEntityManager();
 
@@ -138,6 +142,18 @@ public class DepartmentDAO {
 
         } finally {
             em.close();
+        }
+    }
+
+    public List<Department> findAllWithEmployees() {
+        try (EntityManager em = emf.createEntityManager()) {
+
+            return em.createQuery(
+                    "SELECT d " +
+                            "FROM Department d " +
+                            "JOIN FETCH d.employees",
+                    Department.class
+            ).getResultList();
         }
     }
 }
