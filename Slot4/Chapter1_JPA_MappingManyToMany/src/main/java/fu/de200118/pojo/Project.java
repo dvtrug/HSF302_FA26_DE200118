@@ -29,6 +29,26 @@ public class Project {
     public Project() {
     }
 
+    // Do not use the database-generated id in equals/hashCode because
+    // it may change from null to a generated value after persistence.
+    // projectCode is used as the stable business key.
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Project)) {
+            return false;
+        }
+        Project other = (Project) obj;
+        return projectCode != null && projectCode.equals(other.projectCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return projectCode != null ? projectCode.hashCode() : 0;
+    }
+
     public long getId() {
         return id;
     }
@@ -77,23 +97,12 @@ public class Project {
         this.endDate = endDate;
     }
 
-    // Do not use the database-generated id in equals/hashCode because
-    // it may change from null to a generated value after persistence.
-    // projectCode is used as the stable business key.
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (!(obj instanceof Project)) {
-            return false;
-        }
-        Project other = (Project) obj;
-        return projectCode != null && projectCode.equals(other.projectCode);
+    public Set<Employee> getEmployees() {
+        return employees;
     }
 
-    @Override
-    public int hashCode() {
-        return projectCode != null ? projectCode.hashCode() : 0;
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
+
 }

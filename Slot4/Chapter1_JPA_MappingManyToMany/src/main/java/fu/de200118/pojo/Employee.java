@@ -42,6 +42,30 @@ public class Employee {
     public Employee() {
     }
 
+    // Do not use the database-generated id in equals/hashCode because
+    // the id may be null before the entity is persisted and assigned later.
+    // Use email as the stable business key instead.
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {return true;}
+        if (!(obj instanceof Employee)) {return false;}
+        Employee other = (Employee) obj;
+        return email != null && email.equals(other.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return email != null ? email.hashCode() : 0;
+    }
+
+    public void assignToProject(Project project) {
+        if (projects == null) {
+            return;
+        }
+        this.projects.add(project);
+        project.getEmployees().add(this);
+    }
+
     public Employee(String fullName, String email, Gender gender, BigDecimal salary) {
         this.email = email;
         this.fullName = fullName;
@@ -128,19 +152,5 @@ public class Employee {
         this.projects = projects;
     }
 
-    // Do not use the database-generated id in equals/hashCode because
-    // the id may be null before the entity is persisted and assigned later.
-    // Use email as the stable business key instead.
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {return true;}
-        if (!(obj instanceof Employee)) {return false;}
-        Employee other = (Employee) obj;
-        return email != null && email.equals(other.email);
-    }
 
-    @Override
-    public int hashCode() {
-        return email != null ? email.hashCode() : 0;
-    }
 }
