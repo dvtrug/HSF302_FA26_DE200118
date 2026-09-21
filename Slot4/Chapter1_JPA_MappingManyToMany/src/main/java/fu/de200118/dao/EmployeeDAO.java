@@ -125,4 +125,13 @@ public class EmployeeDAO {
             em.close();
         }
     }
+
+    public List<Employee> getActiveEmployeesInMultipleProjects() {
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.createQuery("SELECT DISTINCT e FROM Employee e \n" +
+                            "LEFT JOIN FETCH e.projects \n" +
+                            "WHERE e.active = true AND SIZE(e.projects) > 1", Employee.class)
+                    .getResultList();
+        }
+    }
 }

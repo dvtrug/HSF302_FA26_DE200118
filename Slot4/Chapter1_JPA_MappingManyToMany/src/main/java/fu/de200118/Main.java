@@ -17,7 +17,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         testTODO57();
-        testTODO59();
+        //testTODO59();
+        testTODO510();
     }
 
     public static void testTODO57() {
@@ -139,6 +140,15 @@ public class Main {
             em.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void testTODO510() {
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+
+        List<Employee> employees = employeeDAO.getActiveEmployeesInMultipleProjects();
+        for (Employee employee : employees) {
+            System.out.println("ID: " + employee.getId() + " | Name: " + employee.getFullName() + " | Email: " + employee.getEmail());
         }
     }
 }
