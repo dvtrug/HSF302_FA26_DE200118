@@ -27,4 +27,19 @@ public class ProjectDAO {
             em.close();
         }
     }
+
+    public void delete(Long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Project p = em.find(Project.class, id);
+            em.getTransaction().begin();
+            em.remove(p);
+            em.getTransaction().commit();
+        } catch (RuntimeException ex) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw ex;
+        } finally {
+            em.close();
+        }
+    }
 }

@@ -104,4 +104,25 @@ public class EmployeeDAO {
             em.close();
         }
     }
+
+    public void unassignEmployeeFromProject(Long employeeId, Long projectId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Employee e = em.find(Employee.class, employeeId);
+            Project p = em.find(Project.class, projectId);
+            if (e == null || p == null) {
+                throw new IllegalArgumentException("Employee or project not found");
+            }
+            e.removeFromProject(p);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
 }

@@ -17,6 +17,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         testTODO57();
+        testTODO59();
     }
 
     public static void testTODO57() {
@@ -123,6 +124,21 @@ public class Main {
                     );
                 }
             }
+        }
+    }
+
+    public static void testTODO59() {
+        EntityManagerFactory emf = JPAUtil.getEMF();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+
+        try(EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            employeeDAO.unassignEmployeeFromProject(1L, 1L);
+            em.getTransaction().commit();
+            System.out.println("Done");
+            em.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

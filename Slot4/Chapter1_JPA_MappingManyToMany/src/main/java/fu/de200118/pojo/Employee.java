@@ -69,6 +69,14 @@ public class Employee {
         project.getEmployees().add(this);
     }
 
+    public void removeFromProject(Project project) {
+        if (projects == null) {
+            return;
+        }
+        this.projects.remove(project);
+        project.getEmployees().remove(this);
+    }
+
     public Employee(String fullName, String email, Gender gender, BigDecimal salary) {
         this.email = email;
         this.fullName = fullName;
