@@ -134,4 +134,24 @@ public class EmployeeDAO {
                     .getResultList();
         }
     }
+
+    public void deactivateEmployee(Long employeeId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Employee e = em.find(Employee.class, employeeId);
+            if (e != null) {
+                // Nhân viên nghỉ việc chỉ nên set active = false.
+                // Soft delete: Giữ nguyên bảng trung gian để bảo toàn dữ liệu lịch sử dự án
+                // và tối ưu hiệu năng (tránh phát sinh nhiều câu lệnh DELETE không cần thiết).
+                e.setActive(false);
+                em.getTransaction().commit();
+            }
+        } catch (RuntimeException ex) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw ex;
+        } finally {
+            em.close();
+        }
+    }
 }
