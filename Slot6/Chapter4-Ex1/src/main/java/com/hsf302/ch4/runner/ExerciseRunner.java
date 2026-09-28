@@ -31,8 +31,8 @@ public class ExerciseRunner implements CommandLineRunner {
     }
 
     private void partB() { todo6(); todo7();}
-    // todo9(); todo10(); todo11();
-    private void partC() {todo8();}
+    // todo10(); todo11();
+    private void partC() {todo8();  todo9();}
     //todo12(); todo13(); todo14(); todo15(); todo16(); todo17(); todo18(); todo19();
     private void partD() {}
     // todo24();
@@ -92,5 +92,12 @@ public class ExerciseRunner implements CommandLineRunner {
         System.out.println("isEmailExisted(binh.tt@fpt.edu.vn) -> "
                 + studentService.isEmailExisted("binh.tt@fpt.edu.vn"));
         System.out.println("countActive -> " + studentService.countActive());
+    }
+
+    private void todo9() {
+        title("TODO 9: Containing / EndingWith / IsNull");
+        printList("fullName contains 'nguyen'", studentService.searchByName("nguyen"));
+        printList("email domain 'gmail.com'", studentService.findByEmailDomain("gmail.com"));
+        printList("email is null", studentService.findWithoutEmail());
     }
 }
