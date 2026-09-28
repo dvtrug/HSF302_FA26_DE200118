@@ -1,6 +1,7 @@
 package com.hsf302.ch4.service;
 
 import com.hsf302.ch4.dto.StudentSummary;
+import com.hsf302.ch4.pojo.Department;
 import com.hsf302.ch4.pojo.Gender;
 import com.hsf302.ch4.pojo.Student;
 import org.springframework.data.domain.Page;
@@ -50,4 +51,6 @@ public interface StudentService {
     Student updateGpa(String studentCode, double newGpa);   // TODO 20
 
     int deactivateLowGpa(double threshold);   // TODO 21
+
+
 }
