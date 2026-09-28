@@ -39,8 +39,7 @@ public class ExerciseRunner implements CommandLineRunner {
     private void partC() {todo8(); todo9(); todo10(); todo11();}
     private void partD() {todo12(); todo13(); todo14(); todo15(); todo16(); todo17(); todo18(); todo19();}
     private void bonus() {todo24();}
-    //   todo23();
-    private void partE() {todo20(); todo21(); todo22();}
+    private void partE() {todo20(); todo21(); todo22(); todo23();}
 
     // ===== helpers =====
     private void title(String t) {
@@ -204,5 +203,13 @@ public class ExerciseRunner implements CommandLineRunner {
         System.out.println("Students moved: " + moved);
         System.out.println("Students of SE: " + studentService.countByDepartment("SE"));
         printList("Departments left", departmentService.findAll());
+    }
+
+    private void todo23() {
+        title("TODO 23: Derived delete");
+        long deleted = studentService.deleteInactiveStudents();
+        System.out.println("Deleted: " + deleted);
+        System.out.println("Students left: " + studentService.count());
+        printList("Final statistics", departmentService.getStatistics());
     }
 }
