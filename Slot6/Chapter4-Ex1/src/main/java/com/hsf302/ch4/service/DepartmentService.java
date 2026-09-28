@@ -1,7 +1,13 @@
 package com.hsf302.ch4.service;
 
+import com.hsf302.ch4.pojo.Department;
+
+import java.util.List;
+
 public interface DepartmentService {
     // Các method được bổ sung dần từ TODO 6
     long count();
     boolean existsById(long id);
+
+    List<Department> findDepartmentsWithoutStudents();  // TODO 11d
 }
