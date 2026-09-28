@@ -21,6 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.count();
     }
 
+    @Override
     public boolean existsById(long id) {
         return departmentRepository.existsById(id);
     }
