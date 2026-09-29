@@ -1,5 +1,6 @@
 package com.hsf302.ch4.runner;
 
+import com.hsf302.ch4.dto.DepartmentSummary;
 import com.hsf302.ch4.dto.StudentSummary;
 import com.hsf302.ch4.pojo.Department;
 import com.hsf302.ch4.pojo.Gender;
@@ -28,11 +29,13 @@ public class ExerciseRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        partB();
-        partC();
-        partD();
-        bonus();      // chạy trên dữ liệu gốc → trước Part E
-        partE();
+//        partB();
+//        partC();
+//        partD();
+//        bonus();      // chạy trên dữ liệu gốc → trước Part E
+//        partE();
+
+        todo25();
     }
 
     private void partB() {todo6(); todo7();}
@@ -211,5 +214,12 @@ public class ExerciseRunner implements CommandLineRunner {
         System.out.println("Deleted: " + deleted);
         System.out.println("Students left: " + studentService.count());
         printList("Final statistics", departmentService.getStatistics());
+    }
+
+    private void todo25() {
+        title("TODO 25: Find Student By Department");
+        List<DepartmentSummary> list = departmentService.findStudentEachDepartment();
+        list.forEach(d -> System.out.printf("   %s | %d%n", d.getDepartmentName(), d.getStudentCount())
+                );
     }
 }
