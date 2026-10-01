@@ -78,4 +78,11 @@ public class EnrollmentServiceImpl implements EnrollmentService{
         return studentRepository.existsByStudentCodeAndCourses_Code(studentCode, courseCode);
     }
 
+    @Override
+    public List<Student> findGoodStudentsInCourse(String courseCode, double minGpa) {
+        if (minGpa < 0 || minGpa > 4) {
+            throw new IllegalArgumentException("minGpa must be in [0, 4]");
+        }
+        return studentRepository.findGoodStudentsInCourse(courseCode, minGpa);
+    }
 }
