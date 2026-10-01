@@ -41,8 +41,8 @@ public class Exercise2Runner implements CommandLineRunner {
     private void partC() { todo8(); todo9(); todo10(); todo11(); }
     private void partD() { todo12(); todo13(); todo14(); todo15(); todo16(); todo17(); todo18(); todo19(); }
     private void bonus() { todo25(); }
-    // todo21(); todo22(); todo23(); todo24();
-    private void partE() { todo20(); }
+    //  todo22(); todo23(); todo24();
+    private void partE() { todo20(); todo21(); }
 
     // ===== helpers =====
     private void title(String t) {
@@ -214,5 +214,16 @@ public class Exercise2Runner implements CommandLineRunner {
         attempt("enroll XX999 -> HSF302", () -> enrollmentService.enroll("XX999", "HSF302"));
         printList("Courses of IA003", enrollmentService.getCoursesOfStudent("IA003"));
         System.out.println("Students of MKT101: " + enrollmentService.countStudentsInCourse("MKT101"));
+    }
+
+    private void todo21() {
+        title("TODO 21: unenroll");
+        attempt("unenroll AI002 <- AIL303", () -> enrollmentService.unenroll("AI002", "AIL303"));
+        attempt("unenroll IA003 <- PRJ301", () -> enrollmentService.unenroll("IA003", "PRJ301"));
+        attempt("enroll   SE004 -> AIL303", () -> enrollmentService.enroll("SE004", "AIL303"));
+        printList("Students of AIL303", enrollmentService.getStudentsOfCourse("AIL303"));
+        printList("Courses of AI002", enrollmentService.getCoursesOfStudent("AI002"));
+        System.out.println("AI002 still exists? " + studentService.findByStudentCode("AI002").isPresent());
+        System.out.println("Total courses: " + courseService.count());
     }
 }
