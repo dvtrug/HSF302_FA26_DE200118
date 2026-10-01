@@ -41,8 +41,8 @@ public class Exercise2Runner implements CommandLineRunner {
     private void partC() { todo8(); todo9(); todo10(); todo11(); }
     private void partD() { todo12(); todo13(); todo14(); todo15(); todo16(); todo17(); todo18(); todo19(); }
     private void bonus() { todo25(); }
-    //  todo22(); todo23(); todo24();
-    private void partE() { todo20(); todo21(); }
+    //   todo23(); todo24();
+    private void partE() { todo20(); todo21(); todo22(); }
 
     // ===== helpers =====
     private void title(String t) {
@@ -225,5 +225,16 @@ public class Exercise2Runner implements CommandLineRunner {
         printList("Courses of AI002", enrollmentService.getCoursesOfStudent("AI002"));
         System.out.println("AI002 still exists? " + studentService.findByStudentCode("AI002").isPresent());
         System.out.println("Total courses: " + courseService.count());
+    }
+
+    private void todo22() {
+        title("TODO 22: switch course in one transaction");
+        attempt("switch SE001 SWP391 -> MKT101",
+                () -> enrollmentService.switchCourse("SE001", "SWP391", "MKT101"));
+        printList("Courses of SE001", enrollmentService.getCoursesOfStudent("SE001"));
+
+        attempt("switch SE001 PRJ301 -> AIL303",
+                () -> enrollmentService.switchCourse("SE001", "PRJ301", "AIL303"));
+        printList("Courses of SE001 (after rollback)", enrollmentService.getCoursesOfStudent("SE001"));
     }
 }
