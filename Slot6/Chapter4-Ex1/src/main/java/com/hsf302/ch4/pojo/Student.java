@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "students")
@@ -41,6 +44,37 @@ public class Student {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
+
+    @ManyToMany                                        // fetch mặc định LAZY, KHÔNG cascade
+    @JoinTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id"),          // FK → students.id (phía hiện tại)
+            inverseJoinColumns = @JoinColumn(name = "course_id")     // FK → courses.id (phía bên kia)
+    )
+    private Set<Course> courses = new HashSet<>();
+
+    public void enroll(Course c) {
+        courses.add(c);                 // owning side → Hibernate INSERT vào student_courses
+        c.getStudents().add(this);      // inverse side → giữ object Java nhất quán
+    }
+
+    public void unenroll(Course c) {
+        courses.remove(c);              // owning side → Hibernate DELETE khỏi student_courses
+        c.getStudents().remove(this);
+    }
+
+    // equals/hashCode theo business key studentCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student other)) return false;
+        return studentCode != null && studentCode.equals(other.getStudentCode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(studentCode);
+    }
 
     @Override
     public String toString() {
