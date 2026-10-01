@@ -38,8 +38,8 @@ public class Exercise2Runner implements CommandLineRunner {
 
     private void partB() { todo6(); todo7(); }
     private void partC() { todo8(); todo9(); todo10(); todo11(); }
-    //      todo18(); todo19();
-    private void partD() { todo12(); todo13(); todo14(); todo15(); todo16(); todo17(); }
+    //       todo19();
+    private void partD() { todo12(); todo13(); todo14(); todo15(); todo16(); todo17(); todo18(); }
     //todo25();
     private void bonus() { }
     //todo20(); todo21(); todo22(); todo23(); todo24();
@@ -177,5 +177,12 @@ public class Exercise2Runner implements CommandLineRunner {
         title("TODO 17: native SQL on join table - top 3 enrolled courses");
         courseService.findTopEnrolled(3).forEach(r -> System.out.printf(
                 "   %s | %-35s | %d student(s)%n", r.getCode(), r.getName(), r.getEnrolled()));
+    }
+
+    private void todo18() {
+        title("TODO 18: interface projection - enrollments of department AI");
+        enrollmentService.getEnrollmentsOfDepartment("AI").forEach(v -> System.out.printf(
+                "   %s | %-14s | %s | %-35s | %d%n",
+                v.getStudentCode(), v.getFullName(), v.getCourseCode(), v.getCourseName(), v.getCredits()));
     }
 }
