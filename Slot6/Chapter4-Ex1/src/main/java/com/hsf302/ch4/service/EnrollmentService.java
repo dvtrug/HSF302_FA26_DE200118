@@ -12,4 +12,8 @@ public interface EnrollmentService {
     List<Student> findStudentsInCourse(String courseCode);
     long countStudentsInCourse(String courseCode);
     List<Student> findActiveStudentsInCourse(String courseCode);
+
+    // EnrollmentService
+    List<Student> findStudentsWithoutCourses();
+    boolean isEnrolled(String studentCode, String courseCode);
 }
