@@ -1,13 +1,13 @@
-package fu.de200118.demothymleaf;
+package fu.de200118.chapter6;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoThymleafApplication {
+public class StudentManagementApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(DemoThymleafApplication.class, args);
+    SpringApplication.run(StudentManagementApplication.class, args);
   }
 
 }

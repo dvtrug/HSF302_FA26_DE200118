@@ -9,10 +9,10 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>fu.de200118</groupId>
-  <artifactId>demoThymeleaf</artifactId>
+  <artifactId>chapter6</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>demoThymeleaf</name>
-  <description>demoThymleaf</description>
+  <name>student-management</name>
+
   <url/>
   <licenses>
     <license/>
