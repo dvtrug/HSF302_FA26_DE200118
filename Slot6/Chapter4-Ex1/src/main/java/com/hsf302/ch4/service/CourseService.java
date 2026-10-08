@@ -31,4 +31,10 @@ public interface CourseService {
 
     void deleteCourseDirectly(String code);   // cách SAI — để quan sát lỗi
     int deleteCourse(String code);            // cách ĐÚNG
+
+    List<Course> findCourseByCredits(int minCredits, int maxCredits);
+
+    List<Course> findCourseByCredits(int minCredits);
+
+    List<Course> findByNameContainingIgnoreCase(String name);
 }

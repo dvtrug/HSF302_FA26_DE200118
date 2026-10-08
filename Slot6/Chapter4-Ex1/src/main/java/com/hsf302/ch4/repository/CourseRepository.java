@@ -40,4 +40,11 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             "ORDER BY enrolled DESC, c.code",
             nativeQuery = true)
     List<CourseEnrollmentCount> findTopEnrolledNative(@Param("n") int n);
+
+    List<Course> findByCredits(int minCredits, int maxCredits);
+
+    List<Course> findByCreditsGreaterThan(int minCredits);
+
+    @Query("SELECT c FROM Course c WHERE c.name LIKE CONCAT('%', :name, '%') ")
+    List<Course> findByNameContainingIgnoreCase(@Param("name") String name);
 }

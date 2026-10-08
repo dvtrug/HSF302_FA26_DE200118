@@ -41,8 +41,8 @@ public class Exercise2Runner implements CommandLineRunner {
     private void partB() { todo6(); todo7(); }
     private void partC() { todo8(); todo9(); todo10(); todo11(); }
     private void partD() { todo12(); todo13(); todo14(); todo15(); todo16(); todo17(); todo18(); todo19(); }
-    private void bonus() { todo25(); }git
-    private void partE() { todo20(); todo21(); todo22(); todo23(); todo24(); }
+    private void bonus() { todo25(); }
+    private void partE() { todo20(); todo21(); todo22(); todo23(); todo24(); todo26(); todo27(); todo28();}
 
     // ===== helpers =====
     private void title(String t) {
@@ -258,5 +258,20 @@ public class Exercise2Runner implements CommandLineRunner {
         System.out.println("Deleted rows: " + enrollmentService.removeEnrollmentsOfInactiveStudents());
         printCourseStats();
         printList("Students without courses", enrollmentService.findStudentsWithoutCourses());
+    }
+
+    private void todo26() {
+        title("TODO 26: find course by min and max credits");
+        printList("Course: ", courseService.findCourseByCredits(2, 3));
+    }
+
+    private void todo27() {
+        title("TODO 26: find course greater than 2 credits");
+        printList("Course: ", courseService.findCourseByCredits(2));
+    }
+
+    private void todo28() {
+        title("TODO 27: find course with name containing 'ing'");
+        printList("Course: ", courseService.findByNameContainingIgnoreCase("ing"));
     }
 }

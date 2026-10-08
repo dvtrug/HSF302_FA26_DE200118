@@ -112,8 +112,25 @@ public class CourseServiceImpl implements CourseService{
         return students.size();
     }
 
+    @Override
+    public List<Course> findCourseByCredits(int minCredits, int maxCredits) {
+        return courseRepository.findByCredits(minCredits, maxCredits);
+    }
+
+    @Override
+    public List<Course> findCourseByCredits(int minCredits) {
+        return courseRepository.findByCreditsGreaterThan(minCredits);
+    }
+
+    @Override
+    public List<Course> findByNameContainingIgnoreCase(String name) {
+        return courseRepository.findByNameContainingIgnoreCase(name);
+    }
+
     private Course getCourse(String code) {
         return courseRepository.findByCode(code)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found: " + code));
     }
+
+
 }

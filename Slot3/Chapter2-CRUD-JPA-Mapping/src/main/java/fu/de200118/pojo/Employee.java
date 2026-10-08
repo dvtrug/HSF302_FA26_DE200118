@@ -14,6 +14,7 @@ public class Employee {
     private Long id;
     private String fullName;
     private Gender gender;
+
     @Column(unique = true)
     private String email;
     private BigDecimal salary;
