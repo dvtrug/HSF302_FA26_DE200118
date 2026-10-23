@@ -65,4 +65,5 @@ public class StudentService {
                 .average()
                 .orElse(0.0);
     }
+
 }
