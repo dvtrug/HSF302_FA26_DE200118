@@ -8,27 +8,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.Period;
 
-// TODO 18
 @Entity
 @Table(name = "Students")
 public class Student {
 
-    // TODO 18
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    // TODO 1
     @NotBlank(message = "Mã sinh viên không được để trống")
     @Pattern(regexp = "^(SE|SS|SA|HE)\\d{6}$",
-            message = "Mã SV phải có dạng SE/SS/SA/HE + 6 chữ số (VD: SE180001)")
+             message = "Mã SV phải có dạng SE/SS/SA/HE + 6 chữ số (VD: SE180001)")
     @Column(name = "student_code", nullable = false, unique = true, length = 8)
     private String studentCode;
 
     @NotBlank(message = "Họ tên không được để trống")
     @Size(min = 2, max = 50, message = "Họ tên phải từ 2 đến 50 ký tự")
-    @Nationalized                                           // NVARCHAR – lưu tiếng Việt
+    @Nationalized
     @Column(name = "full_name", nullable = false, length = 50)
     private String fullName;
 
@@ -37,7 +34,6 @@ public class Student {
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
-    // TODO 2
     @NotNull(message = "Ngày sinh không được để trống")
     @Past(message = "Ngày sinh phải là ngày trong quá khứ")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -72,7 +68,6 @@ public class Student {
         this.active = active;
     }
 
-    // TODO 3
     public int getAge() {
         if (dateOfBirth == null) return 0;
         return Period.between(dateOfBirth, LocalDate.now()).getYears();
@@ -87,7 +82,6 @@ public class Student {
         return "Yếu";
     }
 
-    // TODO 0: Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -102,6 +96,7 @@ public class Student {
 
     public LocalDate getDateOfBirth() { return dateOfBirth; }
     public void setDateOfBirth(LocalDate dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+    public LocalDate getDob() { return dateOfBirth; }
 
     public Double getGpa() { return gpa; }
     public void setGpa(Double gpa) { this.gpa = gpa; }
