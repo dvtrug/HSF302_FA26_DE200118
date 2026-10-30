@@ -21,6 +21,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     // TODO 2.5
     boolean existsByEmailIgnoreCaseAndIdNot(String email, Long id);
     // TODO 2.6: @Query("SELECT s FROM Student s WHERE ... LIKE LOWER(CONCAT('%', :kw, '%')) ...")
-    @Query("SELECT s FROM Student s WHERE LOWER(s.name) LIKE LOWER(CONCAT('%', :kw, '%'))")
+    @Query("SELECT s FROM Student s " +
+            "WHERE LOWER(s.name) LIKE LOWER(CONCAT('%', :kw, '%')) " +
+            "   OR LOWER(s.email) LIKE LOWER(CONCAT('%', :kw, '%')) " +
+            "ORDER BY s.id")
     List<Student> search(@Param("kw") String keyword);
 }
