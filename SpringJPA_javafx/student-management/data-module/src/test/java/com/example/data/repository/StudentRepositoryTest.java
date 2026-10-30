@@ -74,7 +74,7 @@ class StudentRepositoryTest {
     void search_byEmail() {
         List<Student> result = studentRepository.search("fpt.edu");
         assertEquals(2, result.size());
-        assertEquals(an.getId(), result.getFirst().getId());   // ORDER BY id
+        assertEquals(an.getId(), result.get(0).getId());   // ORDER BY id
     }
 
     @Test
