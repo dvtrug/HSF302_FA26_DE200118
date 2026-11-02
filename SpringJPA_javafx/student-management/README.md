@@ -37,6 +37,9 @@ StudentController → StudentService (interface) → StudentServiceImpl → Stud
 
 ## Ảnh chụp
 ![List](docs/screenshots/01-list.png)
+
 ![Add](docs/screenshots/02-add.png)
+
 ![Validation](docs/screenshots/03-validation.png)
+
 ![Delete](docs/screenshots/04-delete-confirm.png)
