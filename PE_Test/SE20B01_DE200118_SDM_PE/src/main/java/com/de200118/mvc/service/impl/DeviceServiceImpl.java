@@ -36,7 +36,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public List<Device> searchByName(String keyword) {
-        return deviceRepository.findAllOrderByInstallationDateDesc();
+        return deviceRepository.findAllByOrderByInstallationDateDesc();
     }
 
     @Override
