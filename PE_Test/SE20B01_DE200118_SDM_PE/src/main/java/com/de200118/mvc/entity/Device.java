@@ -1,0 +1,103 @@
+package com.de200118.mvc.entity;
+
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "device")
+public class Device {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer deviceId;
+
+    @Column(name = "device_code", nullable = false, unique = true, length = 6)
+    private String deviceCode;
+
+    @Column(name = "device_name", nullable = false, length = 200)
+    private String deviceName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @Column(name = "price", precision = 10, nullable = false, scale = 0)
+    private BigDecimal price;
+
+    @Column(name = "warranty_months", nullable = false)
+    private int warrantyMonths;
+
+    @Column(name = "installation_date", nullable = false)
+    private LocalDate installationDate;
+
+    @Column(name = "status", nullable = false, length = 10)
+    private String status;
+
+    public Device() {
+    }
+
+    public Integer getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getDeviceCode() {
+        return deviceCode;
+    }
+
+    public void setDeviceCode(String deviceCode) {
+        this.deviceCode = deviceCode;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getWarrantyMonths() {
+        return warrantyMonths;
+    }
+
+    public void setWarrantyMonths(int warrantyMonths) {
+        this.warrantyMonths = warrantyMonths;
+    }
+
+    public LocalDate getInstallationDate() {
+        return installationDate;
+    }
+
+    public void setInstallationDate(LocalDate installationDate) {
+        this.installationDate = installationDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}
